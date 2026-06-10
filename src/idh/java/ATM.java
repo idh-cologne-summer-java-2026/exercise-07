@@ -92,3 +92,25 @@ public class ATM {
 	}
 
 }
+
+public class AccountIterator implements Iterator<Account> {
+	int currentid;
+	int currentbalance;
+	Account current;
+
+	AccountIterator(Account[] accounts) {
+		currentid = accounts[0].getId;
+		currentbalance = accounts[0].getBalance;
+	}
+
+	private int Index = 0;
+
+	public boolean hasNext() {
+		if (Index > accounts.length && accounts[Index])
+	}
+
+	public T next() {
+
+	}
+
+}

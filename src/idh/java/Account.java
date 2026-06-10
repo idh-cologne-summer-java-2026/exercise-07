@@ -6,12 +6,16 @@ package idh.java;
  * @author reiterns
  *
  */
-public class Account {
+public class Account implements Iterable<> {
 	// the balance of the account
 	int balance;
 
 	// the id of the account
 	int id;
+
+	public Iterator<> iterator() {
+		return new AccountIterator<>(this);
+	}
 
 	public Account(int id, int status) {
 		this.id = id;
