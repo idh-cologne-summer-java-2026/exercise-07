@@ -83,12 +83,25 @@ public class ATM {
 	 * @param id
 	 * @return
 	 */
-	protected Account getAccount(int id) {
+	protected Account getAccountOld(int id) {
 		for (int i = 0; i < accounts.length; i++) {
 			if (accounts[i].getId() == id)
 				return accounts[i];
 		}
 		return null;
 	}
+	
+	
+	protected Account getAccount(int id) {
+		AccountIterator iter = new AccountIterator(accounts);
+		while(iter.hasNext()) {
+			accounts[iter.currentPosition] = iter.next();
+			if (accounts[iter.currentPosition].getId() == id) {
+				return accounts[iter.currentPosition];
+			}
+		}
+			return null;
+	}
+	
 
 }
