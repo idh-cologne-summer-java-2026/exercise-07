@@ -2,23 +2,19 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 public class ATM {
 
 	// initial cash in the ATM
 	int cash = 100;
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
-
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
+	// Class Bank
+	private Bank bank;
+	
+	public ATM(Bank bank) {
+		this.bank = bank;
 	}
+
 
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
@@ -73,8 +69,14 @@ public class ATM {
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
+		
+		// Class Bank
+		Bank deutscheBank = new Bank();
+		// "Ich glaube an die Deutsche Bank, denn die zahlt aus in bar."
+		// Marius Müller-Westernhagen - Mit Pfefferminz bin ich dein Prinz - 1978
+		ATM atm = new ATM(deutscheBank);
 		atm.run();
+		
 	};
 
 	/**
@@ -83,25 +85,16 @@ public class ATM {
 	 * @param id
 	 * @return
 	 */
-	protected Account getAccountOld(int id) {
-		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i].getId() == id)
-				return accounts[i];
+	protected Account getAccount(int id) {
+		// Class Account wird in Class Bank durchlaufen
+		for (Account account : bank) {
+			// wenn account-Id gefunden wird, wird account zurück gegeben.
+			if (account.getId() == id) {
+				return account; 
+			}
+			// wenn nicht, wird null zurück gegeben
 		}
 		return null;
 	}
 	
-	
-	protected Account getAccount(int id) {
-		AccountIterator iter = new AccountIterator(accounts);
-		while(iter.hasNext()) {
-			accounts[iter.currentPosition] = iter.next();
-			if (accounts[iter.currentPosition].getId() == id) {
-				return accounts[iter.currentPosition];
-			}
-		}
-			return null;
-	}
-	
-
 }

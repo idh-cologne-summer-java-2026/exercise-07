@@ -25,4 +25,5 @@ public class AccountIterator implements Iterator<Account> {
 		currentPosition = currentPosition + 1;
 		return accounts[currentPosition];
 	}
+	
 }
