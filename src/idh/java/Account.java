@@ -1,21 +1,26 @@
 package idh.java;
 
+import java.util.Iterator;
+
 /**
  * This class represents an account in our bank.
  * 
  * @author reiterns
  *
  */
-public class Account implements Iterable<> {
+public class Account {
 	// the balance of the account
 	int balance;
 
 	// the id of the account
 	int id;
 
+	/**
+	 * Useless?
 	public Iterator<> iterator() {
 		return new AccountIterator<>(this);
 	}
+	*/
 
 	public Account(int id, int status) {
 		this.id = id;
