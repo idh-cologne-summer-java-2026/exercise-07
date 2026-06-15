@@ -10,7 +10,7 @@ public class ATM {
 	int cash = 100;
 
 	// accounts known to the ATM
-	Account[] accounts = new Account[5];
+	Bank bank;
 
 	public ATM() {
 		// create accounts with varying balances
