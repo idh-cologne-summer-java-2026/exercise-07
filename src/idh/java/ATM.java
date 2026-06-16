@@ -2,30 +2,20 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 public class ATM {
 
 	// initial cash in the ATM
 	int cash = 100;
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
+	// Referenz auf die Bank (anstelle des Arrays)
+	Bank bank;
 
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
+	// Der Konstruktor bekommt jetzt die Bank übergeben
+	public ATM(Bank bank) {
+		this.bank = bank;
 	}
 
-	/**
-	 * Main command loop of the ATM Asks the user to enter a number, and passes this
-	 * number to the function cashout(...) which actually does the calculation and
-	 * produces money. If the user enters anything else than an integer number, the
-	 * loop breaks and the program exists
-	 */
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
@@ -64,37 +54,38 @@ public class ATM {
 
 		// withdraw
 		account.withdraw(amount);
-		cash += amount;
+		cash -= amount;
 		System.out.println("Ok, here is your money, enjoy!");
-
-	};
+	}
 
 	/**
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
+		// 1. Zuerst die Bank gründen (die erstellt intern die Konten)
+		Bank meineBank = new Bank();
+		
+		// 2. Den Automaten aufstellen und ihm sagen, zu welcher Bank er gehört
+		ATM atm = new ATM(meineBank);
+		
+		// 3. Automaten starten
 		atm.run();
-		
-	AccountIterator iter = new AccountIterator (atm);
-		while (iter.hasNext()) {
-			Account account = iter.next();
-			System.out.println(account.getBalance());
-		}
-		
-	};
+	}
 
 	/**
 	 * Retrieves the account given an id.
-	 * 
-	 * @param id
+	 * * @param id
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i].getId() == id)
-				return accounts[i];
+		// LÖSUNG FÜR AUFGABE 2: Die for-each Schleife mit Doppelpunkt!
+		// Das funktioniert automatisch, weil die Klasse Bank "Iterable" implementiert.
+		for (Account currentAccount : bank) {
+			if (currentAccount.getId() == id) {
+				return currentAccount;
+			}
 		}
+		
 		return null;
 	}
 
