@@ -1,5 +1,5 @@
 package idh.java;
-
+import java.util.ArrayList; 
 /**
  * This class represents an account in our bank.
  * 
