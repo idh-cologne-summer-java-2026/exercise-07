@@ -15,9 +15,17 @@ public class ATM {
 	public ATM() {
 		// create accounts with varying balances
 		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
+		AccountIterator iter = new AccountIterator (this);
+		while (iter.hasNext()) {
+			Account account = iter.next();
+			System.out.println(account.getBalance());
 		}
+		/*for (int i = 0; i < accounts.length; i++) {
+			accounts[i] = new Account(i, random.nextInt(1000));
+		}*/
+	}
+	public int getSize() {
+		return this.getSize(); 
 	}
 
 	/**
@@ -76,11 +84,6 @@ public class ATM {
 		ATM atm = new ATM();
 		atm.run();
 		
-	AccountIterator iter = new AccountIterator (atm);
-		while (iter.hasNext()) {
-			Account account = iter.next();
-			System.out.println(account.getBalance());
-		}
 		
 	};
 
