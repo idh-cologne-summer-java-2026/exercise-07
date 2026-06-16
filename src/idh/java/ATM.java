@@ -1,4 +1,5 @@
 package idh.java;
+import java.util.Iterator;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -76,7 +77,7 @@ public class ATM {
 		ATM atm = new ATM();
 		atm.run();
 		
-	AccountIterator iter = new AccountIterator (atm);
+	AccounrIterator iter = new AccounrIterator (atm);
 		while (iter.hasNext()) {
 			Account account = iter.next();
 			System.out.println(account.getBalance());

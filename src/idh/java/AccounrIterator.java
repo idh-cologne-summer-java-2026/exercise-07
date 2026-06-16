@@ -3,10 +3,16 @@ package idh.java;
 import java.util.Iterator;
 
 public class AccounrIterator implements Iterator<Account> {
-
+Account account;
+int currentPosition = 0;
+	public AccounrIterator(Account account){
+		this.account = account;
+		
+	}
+	
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
+		return this.currentPosition <account.size();
 		return false;
 	}
 
