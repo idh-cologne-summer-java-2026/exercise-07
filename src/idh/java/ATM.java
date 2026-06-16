@@ -2,22 +2,16 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 public class ATM {
 
 	// initial cash in the ATM
 	int cash = 100;
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
+	private final Bank bank;
 
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
+	public ATM(Bank bank) {
+		this.bank = bank;
 	}
 
 	/**
@@ -73,15 +67,14 @@ public class ATM {
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
-		atm.run();
-		
-	AccountIterator iter = new AccountIterator (atm);
-		while (iter.hasNext()) {
-			Account account = iter.next();
-			System.out.println(account.getBalance());
-		}
-		
+		Bank bank = new Bank(5);
+		ATM atm = new ATM(bank);
+	
+		for (Account account : bank) {
+			System.out.println(account.getId() + ": " + account.getBalance());
+		}		
+
+		atm.run();		
 	};
 
 	/**
@@ -91,9 +84,9 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i].getId() == id)
-				return accounts[i];
+		for (Account account : bank) {
+			if (account.getId() == id)
+				return account;
 		}
 		return null;
 	}
