@@ -75,13 +75,14 @@ public class ATM {
 	public static void main(String[] args) {
 		ATM atm = new ATM();
 		atm.run();
-		
-	AccountIterator iter = new AccountIterator (atm);
+
+		AccountIterator iter = new AccountIterator(atm.accounts);
+
 		while (iter.hasNext()) {
 			Account account = iter.next();
 			System.out.println(account.getBalance());
 		}
-		
+
 	};
 
 	/**
@@ -91,10 +92,18 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i].getId() == id)
-				return accounts[i];
+
+		AccountIterator iterator = new AccountIterator(accounts);
+
+		while (iterator.hasNext()) {
+
+			Account account = iterator.next();
+
+			if (account.getId() == id) {
+				return account;
+			}
 		}
+
 		return null;
 	}
 
