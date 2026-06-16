@@ -8,18 +8,23 @@ public class ATM {
 
 	// initial cash in the ATM
 	int cash = 100;
-
+	int size = 5; 
 	// accounts known to the ATM
-	Account[] accounts = new Account[5];
+	Account[] accounts = new Account[size];
 
 	public ATM() {
 		// create accounts with varying balances
 		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
+		AccountIterator Iter = new AccountIterator(this); 
+		while(Iter.hasNext()) {
+			accounts[Iter.currentPosition] = new Account(Iter.currentPosition, random.nextInt(1000));
+			Account accounts = Iter.next(); 
 		}
 	}
-
+	
+	public int size() {
+		return size;
+	}
 	/**
 	 * Main command loop of the ATM Asks the user to enter a number, and passes this
 	 * number to the function cashout(...) which actually does the calculation and
@@ -75,14 +80,8 @@ public class ATM {
 	public static void main(String[] args) {
 		ATM atm = new ATM();
 		atm.run();
-		
-	AccountIterator iter = new AccountIterator (atm);
-		while (iter.hasNext()) {
-			Account account = iter.next();
-			System.out.println(account.getBalance());
+	
 		}
-		
-	};
 
 	/**
 	 * Retrieves the account given an id.
@@ -91,11 +90,16 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i].getId() == id)
-				return accounts[i];
-		}
-		return null;
-	}
+	AccountIterator Iterget = new AccountIterator(this);
 
+    	while (Iterget.hasNext()) {
+        accounts[Iterget.currentPosition] = Iterget.next();
+
+        if (accounts[Iterget.currentPosition].getId() == id) {
+            return accounts[Iterget.currentPosition];
+        }
+    }
+
+    return null;
+	}
 }
