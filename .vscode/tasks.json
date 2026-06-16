@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run ATM",
+			"type": "shell",
+			"command": "javac",
+			"args": [
+				"-d",
+				"out",
+				"src\\idh\\java\\Account.java",
+				"src\\idh\\java\\ATM.java",
+				";",
+				"java",
+				"-cp",
+				"out",
+				"idh.java.ATM"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		}
+	]
+}
+
+//comand to start javac -d out src\idh\java\Account.java src\idh\java\ATM.java; java -cp out idh.java.ATM

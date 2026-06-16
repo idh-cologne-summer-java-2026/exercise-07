@@ -9,7 +9,6 @@ package idh.java;
 public class Account {
 	// the balance of the account
 	int balance;
-
 	// the id of the account
 	int id;
 
