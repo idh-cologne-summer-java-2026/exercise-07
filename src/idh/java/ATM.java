@@ -12,6 +12,8 @@ public class ATM {
 	// accounts known to the ATM
 	Account[] accounts = new Account[5];
 
+	static Bank bank = new Bank();
+	
 	public ATM() {
 		// create accounts with varying balances
 		Random random = new Random();
@@ -76,9 +78,8 @@ public class ATM {
 		ATM atm = new ATM();
 		atm.run();
 		
-	AccountIterator iter = new AccountIterator (atm);
-		while (iter.hasNext()) {
-			Account account = iter.next();
+		//replaced iterator logic
+		for(Account account : bank) {
 			System.out.println(account.getBalance());
 		}
 		
