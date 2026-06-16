@@ -20,12 +20,7 @@ public class ATM {
 		}
 	}
 
-	/**
-	 * Main command loop of the ATM Asks the user to enter a number, and passes this
-	 * number to the function cashout(...) which actually does the calculation and
-	 * produces money. If the user enters anything else than an integer number, the
-	 * loop breaks and the program exists
-	 */
+
 	public void run() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
@@ -84,16 +79,12 @@ public class ATM {
 		
 	};
 
-	/**
-	 * Retrieves the account given an id.
-	 * 
-	 * @param id
-	 * @return
-	 */
 	protected Account getAccount(int id) {
-		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i].getId() == id)
-				return accounts[i];
+		AccountIterator iter = new AccountIterator(this);
+		while (iter.hasNext()) {
+			Account account = iter.next();
+			if (account.getId() == id)
+				return account;
 		}
 		return null;
 	}
