@@ -2,6 +2,8 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class ATM {
@@ -50,7 +52,7 @@ public class ATM {
 		}
 
 		// check for existence of the account
-		Account account = getAccount(accountNumber);
+		Account account = getAccountIterated(accountNumber);
 		if (account == null) {
 			System.out.println("Sorry, this account doesn't exist.");
 			return;
@@ -98,4 +100,43 @@ public class ATM {
 		return null;
 	}
 
+	/**
+	 * Retrieves the account given an id.
+	 * Uses Iterator
+	 * 
+	 * @param id
+	 * @return
+	 */
+	protected Account getAccountIterated(int id) {
+		AccountIterator A = new AccountIterator(accounts);
+		while(A.hasNext())
+			if (accounts[A.index].getId() == id)
+				return accounts[A.index];
+		return null;
+	}
+
+}
+
+class AccountIterator implements Iterator<Account> {
+	public int index;
+	private Account[] accountarray;
+
+	AccountIterator(Account[] accounts) {
+		index = 0;
+		accountarray = accounts;
+	}
+
+	public boolean hasNext() {
+		while (index < accountarray.length)
+			return true;
+			index++;
+		return false;
+	}
+
+	public Account next() {
+		if(!hasNext())
+			throw new NoSuchElementException();
+		return accountarray[index++];
+
+	}
 }

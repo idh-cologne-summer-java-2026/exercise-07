@@ -1,5 +1,7 @@
 package idh.java;
 
+import java.util.Iterator;
+
 /**
  * This class represents an account in our bank.
  * 
@@ -12,6 +14,13 @@ public class Account {
 
 	// the id of the account
 	int id;
+
+	/**
+	 * Useless?
+	public Iterator<> iterator() {
+		return new AccountIterator<>(this);
+	}
+	*/
 
 	public Account(int id, int status) {
 		this.id = id;
