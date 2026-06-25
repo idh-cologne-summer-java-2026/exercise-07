@@ -19,5 +19,16 @@ public class Bank implements Iterable<Account> {
 	public Iterator<Account> iterator() {
 		return new AccountIterator(accounts);
 	}
+	
+	/**
+	 * Demonstrates iteration using a while-loop with Iterator
+	 */
+	public void printAllAccounts() {
+		Iterator<Account> iterator = iterator();
+		while(iterator.hasNext()) {
+			Account account = iterator.next();
+			System.out.println("Account ID: " + account.getId() + ", Balance: " + account.getBalance());
+		}
+	}
 
 }
