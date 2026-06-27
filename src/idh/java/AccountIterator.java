@@ -7,8 +7,12 @@ public class AccountIterator implements Iterator<Account> {
 	Account[] accounts;
 	int currentPosition = 0;
 	
-	public AccountIterator (ATM atm) {
-		this.accounts = atm.accounts;
+//	public AccountIterator (ATM atm) {
+//		this.accounts = atm.accounts;
+//	}
+	
+	public AccountIterator (Account[] accounts) {
+		this.accounts = accounts;
 	}
 	
 	public boolean hasNext() {

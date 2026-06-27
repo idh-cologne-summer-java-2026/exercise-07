@@ -2,22 +2,16 @@ package idh.java;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 public class ATM {
 
 	// initial cash in the ATM
 	int cash = 100;
 
-	// accounts known to the ATM
-	Account[] accounts = new Account[5];
+	Bank bank;
 
-	public ATM() {
-		// create accounts with varying balances
-		Random random = new Random();
-		for (int i = 0; i < accounts.length; i++) {
-			accounts[i] = new Account(i, random.nextInt(1000));
-		}
+	public ATM(Bank owner) {
+		this.bank = owner;
 	}
 
 	/**
@@ -73,17 +67,15 @@ public class ATM {
 	 * Launches the ATM
 	 */
 	public static void main(String[] args) {
-		ATM atm = new ATM();
-		
-		
-		AccountIterator iter = new AccountIterator(atm);
-			while (iter.hasNext()) {
-				Account account = iter.next();
-				System.out.println(account.getId() + ": " + account.getBalance());
-			}
-			
-			atm.run();
-	};
+		ATM atm = new ATM(new Bank());
+//		ATM atm = new ATM(new Bank());
+//		AccountIterator iter = new AccountIterator(atm);
+//			while (iter.hasNext()) {
+//				Account account = iter.next();
+//				System.out.println(account.getId() + ": " + account.getBalance());
+//			}
+		atm.run();
+	}
 
 	/**
 	 * Retrieves the account given an id.
@@ -92,13 +84,19 @@ public class ATM {
 	 * @return
 	 */
 	protected Account getAccount(int id) {
-		AccountIterator iter = new AccountIterator(this);
-		while (iter.hasNext()) {
-			Account account = iter.next();
-			if (account.getId() == id)
+//		AccountIterator iter = new AccountIterator(this);
+//		while (iter.hasNext()) {
+//			Account account = iter.next();
+//			if (account.getId() == id)
+//				return account;
+		for (Account account : bank) 
+			if (account.getId() == id) {
 				return account;
-		}
-		return null;
+			}
+			return null;	
 	}
-
+	
+	
 }
+
+
