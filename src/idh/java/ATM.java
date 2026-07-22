@@ -87,9 +87,11 @@ public class ATM {
 
 	
 	class AccountIterator implements Iterator<Account> {
-
-		AccountIterator(ATM atm) {
-			
+		private Account current;
+		
+		
+		AccountIterator(Account account) {
+			this.current = account;
 		}
 		@Override
 		public boolean hasNext() {
